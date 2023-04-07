@@ -15,10 +15,13 @@ struct HomeView: View {
             // MARK: Header
             Spacer()
             
-            Image("character-2")
-                .resizable()
-                .scaledToFit()
+            ZStack {
+                CircleGroupView(ShapeColor: .gray, ShapeOpacity: 0.1)
+                Image("character-2")
+                    .resizable()
+                    .scaledToFit()
                 .padding()
+            }
             
             
             // MARK: Center
@@ -44,6 +47,7 @@ struct HomeView: View {
             .buttonStyle(.borderedProminent)
             .buttonBorderShape(.capsule)
             .controlSize(.large)
+            .padding()
         }
     }
 }
