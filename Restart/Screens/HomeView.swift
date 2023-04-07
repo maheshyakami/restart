@@ -56,6 +56,7 @@ struct HomeView: View {
             .buttonStyle(.borderedProminent)
             .buttonBorderShape(.capsule)
             .controlSize(.large)
+            .padding()
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
