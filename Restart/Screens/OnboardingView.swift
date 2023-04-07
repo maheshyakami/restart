@@ -151,6 +151,7 @@ struct OnboardingView: View {
                                 }).onEnded({ _ in
                                     withAnimation(Animation.easeOut(duration: 0.3)) {
                                         if buttonOffset > buttonWidth / 2 {
+                                            playSound(sound: "chimeup", type: "mp3")
                                             buttonOffset = buttonWidth - 80
                                             isOnboardingViewActive = false
                                         } else {
@@ -177,6 +178,7 @@ struct OnboardingView: View {
         .onAppear {
             isAnimating = true
         }
+        .preferredColorScheme(.dark)
     }
 }
 
