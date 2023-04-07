@@ -14,6 +14,7 @@ struct OnboardingView: View {
     @State private var buttonOffset: CGFloat = 0.0
     @State private var isAnimating: Bool = false
     @State private var imageOffSet: CGSize = .zero
+    @State private var indicatorOpacity: Double = 1.0
     
     // MARK: Body
     
@@ -65,14 +66,30 @@ struct OnboardingView: View {
                             .onChanged({ gesture in
                                 if abs(imageOffSet.width) <= 150 {
                                     imageOffSet = gesture.translation
+                                    
+                                    withAnimation(.linear(duration: 0.25)) {
+                                        indicatorOpacity = 0
+                                    }
                                 }
                             })
                             .onEnded({ _ in
                                 imageOffSet = .zero
+                                withAnimation(.linear(duration: 0.25)) {
+                                    indicatorOpacity = 1.0
+                                }
                             })
                         )
                         .animation(.easeInOut(duration: 1), value: imageOffSet)
                     
+                }
+                .overlay(alignment: .bottom) {
+                    Image(systemName: "arrow.left.and.right.circle")
+                        .font(.system(size: 44, weight: .ultraLight))
+                        .foregroundColor(.white)
+                        .offset(y: 20)
+                        .opacity(isAnimating ? 1: 0)
+                        .animation(.easeIn(duration: 1).delay(2), value: isAnimating)
+                        .opacity(indicatorOpacity)
                 }
                 
                 Spacer()
